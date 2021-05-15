@@ -27,39 +27,78 @@
 				password: '',
 			}
 		},
-		onShow(){
+		onShow() {
 			var h = document.body.scrollHeight;
-			    window.onresize = function(){
-			        if (document.body.scrollHeight < h) {
-			            document.getElementsByClassName("footer")[0].style.display = "none";
-			        }else{
-			            document.getElementsByClassName("footer")[0].style.display = "block";
-			        }
-			    };
+			window.onresize = function() {
+				if (document.body.scrollHeight < h) {
+					document.getElementsByClassName("footer")[0].style.display = "none";
+				} else {
+					document.getElementsByClassName("footer")[0].style.display = "block";
+				}
+			};
 		},
 		methods: {
 			login() {
 				if (this.username.length == "") {
-					this.$msg('用户名不能为空', 2000)
+					uni.showToast({
+						title: '用户名不能为空',
+						icon: 'none'
+					})
 					return
 				}
-				if (this.password.length < 6) {
-					this.$msg('用户密码错误', 2000)
+				if (this.password.length < 5) {
+					uni.showToast({
+						title: '用户密码错误',
+						icon: 'none'
+					})
 					return
 				}
 				uni.showLoading({
-					title:'登录中'
+					title: '登录中'
 				})
+				setTimeout(function() {
+					//登录接口
+					uni.request({
+						url: this.$apiPath + "?m=admin&c=login&a=login",
+						method: 'POST',
+						dataType: 'json',
+						header: {
+							"content-type": "application/x-www-form-urlencoded"
+						},
+						data: {
+							email: this.username,
+							password: this.password
+						},
+						success: (res) => {
+							if (res.data.error == 0) {
+								console.log(res.data.data.token)
+								uni.setStorage({
+									key: 'token',
+									data: res.data.data.token,
+									success(res) {
+										console.log('存入成功了')
+									},
+								});
+								uni.switchTab({
+									url: '../order/order'
+								});
+							} else {
+								uni.showToast({
+									title: res.data.msg
+								})
+							}
+						}
+					})
+				}.bind(this), 1000)
 			}
 		}
 	}
-	
 </script>
 
 <style>
 	page {
 		background: #39355a;
-		overflow:hidden;
+		overflow: hidden;
 		/* display: inline-block; */
 		/* border-top:1px solid; */
 		/* padding-top: 150rpx; */

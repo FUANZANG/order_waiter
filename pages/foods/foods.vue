@@ -1,58 +1,137 @@
 <template>
 	<view>
-		<!-- <view>
-			<text>一二三四五六七八九十</text>
+		<view class="manage_list">
+			<view class="food_manage" @click="onClickFoodManage">
+				<image class="manage_img" src="../../static/img/up.png" mode=""></image>
+				<view class="manage_name">菜品管理 <br /><i>菜品上下架及编辑菜品</i> </view>
+				<view class="manage_go">前往<image src="../../static/img/right.png" mode=""></image>
+				</view>
+			</view>
+			<view class="food_add" @click="onClickFoodAdd">
+				<image class="manage_img" src="../../static/img/add.png" mode=""></image>
+				<view class="manage_name">添加菜品 <br /> <i>可添加菜品</i> </view>
+				<view class="manage_go">前往<image src="../../static/img/right.png" mode="">
+				</view>
+			</view>
+			<view class="food_new" @click="onClickFoodNew">
+				<image class="manage_img" src="../../static/img/tj.png" mode=""></image>
+				<view class="manage_name">新功能 <br /> <i>敬请期待</i> </view>
+				<view class="manage_go">前往<image src="../../static/img/right.png" mode="">
+				</view>
+			</view>
 		</view>
-		<view>
-			<text selectable>selectable 文字可以被选中</text>
-		</view>
-		<view>
-			<text space="emsp">emsp 中文字符文字大小</text>
-		</view>
-		<view>
-			<text space="ensp">ensp 中文字符一半大小</text>
-		</view>
-		<view>
-			<text space="nbsp" style="font-size: 25px;">nbsp 根据字体设置的大小</text>
-		</view> -->
-		<!-- <view class="box2" hover-class="box2-active" :hover-start-time="2000" :hover-stay-time="2000">
-			<view class="box" hover-class="box-active" hover-stop-propagation>这是一个box 阻止冒泡hover-stop-propagation</view>
-		</view>
-		<button type="default" @click="btnClick(1,$event)">按钮</button> -->
 	</view>
 </template>
 
 <script>
-	export default{
-		data(){
-			return{
-				
+	export default {
+		data() {
+			return {
+
 			}
 		},
-		methods:{
-			// btnClick(num,e){
-			// 	console.log(num,e)
-			// }
+		methods: {
+			onClickFoodManage() {
+				uni.navigateTo({
+						url: './food_manage',
+						// 动画类型与时长
+						animationType: 'zoom-fade-out',
+						animationDuration: 200
+					}),
+					// 震动反馈
+					uni.vibrateShort({
+						success: function() {
+							console.log('震动反馈');
+						}
+					});
+			},
+			onClickFoodAdd() {
+				uni.navigateTo({
+						url: './food_add',
+						// 动画类型与时长
+						animationType: 'zoom-fade-out',
+						animationDuration: 200
+					}),
+					// 震动反馈
+					uni.vibrateShort({
+						success: function() {
+							console.log('震动反馈');
+						}
+					});
+			},
+			onClickFoodNew() {
+				uni.showToast({
+					title: '新功能开发中，敬请期待',
+					icon: 'none'
+				})
+			}
 		}
 	}
 </script>
 
 <style>
-	/* @import url("");
-	.box{
-		width: 400rpx;
-		height: 100rpx;
-		background-color: #C0C0C0;
+	page {
+		background: #3a3458;
+		overflow: auto;
 	}
-	.box2{
-		width: 600rpx;
-		height: 300rpx;
-		background-color: #2C405A;
+
+	.food_manage,
+	.food_add,
+	.food_new {
+		width: 80%;
+		height: 150rpx;
+		padding: 5%;
+		margin: 5%;
+		border-radius: 30rpx;
+		background: #4f496b;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		position: relative;
+		box-shadow: 2rpx 2rpx 20rpx #000;
 	}
-	.box-active{
-		background: #555555;
+
+	.food_manage:active,
+	.food_add:active,
+	.food_new:active {
+		transform: translate(2rpx, 2rpx);
 	}
-	.box2-active{
-		background: #DD524D;
-	} */
+
+	.manage_img {
+		width: 150rpx;
+		height: 150rpx;
+		border-radius: 10rpx;
+	}
+
+	.manage_name {
+		position: absolute;
+		top: 20%;
+		left: 220rpx;
+		color: #ccc;
+		font-size: 35rpx;
+	}
+
+	.manage_name i {
+		width: 250%;
+		position: absolute;
+		top: 150%;
+		font-style: normal;
+		font-size: 29rpx;
+		color: #888da7;
+	}
+
+	.manage_go {
+		position: absolute;
+		top: 20%;
+		right: 15%;
+		color: #888da7;
+	}
+
+	.manage_go image {
+		position: absolute;
+		top: 20%;
+		right: -70%;
+		width: 15rpx;
+		height: 25rpx;
+	}
 </style>

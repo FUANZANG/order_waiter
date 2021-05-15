@@ -1,11 +1,11 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path":"pages/login/login",
-			"style":{
-				"navigationStyle":"custom"
-			}
-		},
+		// {
+		// 	"path":"pages/login/login",
+		// 	"style":{
+		// 		"navigationStyle":"custom"
+		// 	}
+		// },
 		{
 			"path": "pages/order/order",
 			"style": {
@@ -17,9 +17,39 @@
 			}
 		},
 		{
+			"path": "pages/order/ordershow",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
 			"path": "pages/foods/foods",
 			"style": {
+				"navigationBarTitleText": "菜品管理",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+							"fontSrc": "/static/tabbar/iconfont.ttf",
+							"text": "\ue66e   ",
+							"fontSize": "18",
+							"float": "right",
+							"color": "#323458"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/foods/food_manage",
+			"style": {
 				"navigationBarTitleText": "菜品管理"
+			}
+		},
+		{
+			"path": "pages/foods/food_add",
+			"style": {
+				"navigationBarTitleText": "添加菜品"
 			}
 		}
 	],
