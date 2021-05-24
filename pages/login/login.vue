@@ -23,8 +23,8 @@
 	export default {
 		data() {
 			return {
-				username: '',
-				password: '',
+				username: '123',
+				password: '123456',
 			}
 		},
 		onShow() {
@@ -58,6 +58,8 @@
 				})
 				setTimeout(function() {
 					//登录接口
+					console.log(this.username),
+					console.log(this.password),
 					uni.request({
 						url: this.$apiPath + "?m=admin&c=login&a=login",
 						method: 'POST',
@@ -67,7 +69,7 @@
 						},
 						data: {
 							email: this.username,
-							password: this.password
+							password: this.password,
 						},
 						success: (res) => {
 							if (res.data.error == 0) {
